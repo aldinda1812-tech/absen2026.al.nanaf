@@ -98,7 +98,7 @@ td.name{text-align:left;font-weight:600;white-space:nowrap}
 <header class="hero noprint">
  <span class="cloud" style="top:18px;animation-delay:-5s"></span><span class="cloud" style="top:60px;transform:scale(.7);animation-duration:55s;animation-delay:-30s"></span><span class="cloud" style="top:30px;animation-duration:48s;animation-delay:-18s;opacity:.7"></span>
  <h1 class="brand">Absensi KAP TENDY WATO &amp; IFEN TJHAI</h1>
- <p>Sistem Absensi Karyawan</p>
+ <p>Sistem Absensi Magang</p>
  <svg class="wv" viewBox="0 24 150 28" preserveAspectRatio="none" aria-hidden="true">
   <defs><path id="gw" d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18v44h-352z"/></defs>
   <g class="par">
@@ -247,9 +247,9 @@ function adminTable(){
 function render(){
  if(!me||!USERS[me]){loginPage();return}
  const admin=USERS[me].admin;
- const tabs=admin?`<div class="tabs noprint"><button class="${view=='me'?'on':''}" onclick="view='me';render()">Absen Saya</button><button class="${view=='all'?'on':''}" onclick="view='all';render()">Rekap Semua Karyawan</button>${Object.keys(USERS).filter(u=>u!=me).map(u=>`<button class="${view==u?'on':''}" onclick="view='${u}';render()">${USERS[u].name}</button>`).join('')}</div>`:'';
+ const tabs=admin?`<div class="tabs noprint"><button class="${view=='me'?'on':''}" onclick="view='me';render()">Absen Saya</button><button class="${view=='all'?'on':''}" onclick="view='all';render()">Rekap Semua Magang</button>${Object.keys(USERS).filter(u=>u!=me).map(u=>`<button class="${view==u?'on':''}" onclick="view='${u}';render()">${USERS[u].name}</button>`).join('')}</div>`:'';
  let target=view=='all'?null:(view=='me'||!admin?me:view);
- const title=view=='all'&&admin?'Rekap Absensi Seluruh Karyawan':'Absensi '+USERS[target].name;
+ const title=view=='all'&&admin?'Rekap Absensi Seluruh Magang':'Absensi '+USERS[target].name;
  $('app').innerHTML=`<div class="top noprint"><div>Login sebagai <b>${USERS[me].name}</b>${admin?' (Pusat)':''}</div>
   <div class="row"><input type="month" id="per" value="${period}" style="margin:0;width:auto" onchange="setPeriod(this.value)"><button onclick="window.print()">🖨️ Cetak / Simpan PDF</button><button class="b-g" onclick="logout()">Keluar</button></div></div>
   ${tabs}${(view=='me'||!admin)?myCard():''}
